@@ -1,0 +1,180 @@
+:root {
+    --clr-branco: #FFF;
+    --clr-preto: #000;
+    --clr-cinza-claro: #F5F5F5;
+    --clr-cinza-medio: #E0E0E0;
+    --clr-cinza-escuro: #757575;
+    --clr-azul-claro: #2196F3;
+    --clr-azul-medio: #1976D2;
+    --clr-azul-escuro: #0D47A1;
+    --clr-vermelho-claro: #FFCDD2;
+    --clr-vermelho-medio: #E57373;
+    --clr-vermelho-escuro: #C62828;
+    --clr-verde-claro: #C8E6C9;
+    --clr-verde-medio: #81C784;
+    --clr-verde-escuro: #2E7D32;
+    --clr-amarelo-claro: #FFF9C4;
+    --clr-amarelo-medio: #FFF176;
+    --clr-amarelo-escuro: #FFEB3B;
+    --clr-laranja-claro: #FFE0B2;
+    --clr-laranja-medio: #FFB74D;
+    --clr-laranja-escuro: #FF9800;
+
+    --font-family: 'Hepta Slab', sans-serif;
+    --font-size: 1rem;
+    --font-weight: 400;
+    --line-height: 1.5;
+    --border-radius: 0.25rem;
+    --transition: all 0.3s linear;
+    --shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+    --max-width: 1170px;
+    --fixed-width: 620px;
+    --small-width: 300px;
+    --small-height: 200px;
+    --large-height: 400px;
+    --small-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
+    --large-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
+    --small-radius: 0.25rem;
+    --large-radius: 0.5rem;
+    --small-transition: all 0.3s linear;
+    --large-transition: all 0.3s linear;
+
+    --primary-color: var(--clr-azul-medio);
+    --primary-color-light: var(--clr-azul-claro);
+    --primary-color-dark: var(--clr-azul-escuro);
+    --secondary-color: var(--clr-verde-medio);
+    --secondary-color-light: var(--clr-verde-claro);
+    --secondary-color-dark: var(--clr-verde-escuro);
+    --tertiary-color: var(--clr-vermelho-medio);
+    --tertiary-color-light: var(--clr-vermelho-claro);
+    --tertiary-color-dark: var(--clr-vermelho-escuro);
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    line-height: 1.5;
+    font-size: var(--font-size);
+    font-family: var(--font-family);
+    color: var(--clr-preto);
+}
+
+/* .hepta-slab-400 {
+  font-family: "Hepta Slab", serif;
+  font-optical-sizing: auto;
+  font-weight: var(--font-weight);
+  font-style: normal;
+} */
+
+main {
+    width: 100%;
+    min-height: 100vh;
+}
+
+footer {
+    width: 100%;
+    background: var(--clr-cinza-claro);
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.container {
+    max-width: var(--max-width);
+    width: 100%;
+    margin: 0 auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family);
+    font-weight: var(--font-weight);
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.form-block {
+    margin-bottom: 1.25rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+
+}
+
+.form-input {
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    font-weight: var(--font-weight);
+    line-height: 1.5;
+    color: var(--clr-preto);
+    border: 1px solid var(--clr-cinza-medio);
+    border-radius: var(--border-radius);
+    padding: 0.375rem 0.75rem;
+    transition: var(--transition);
+}
+
+.form-textarea {
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    font-weight: var(--font-weight);
+    line-height: 1.5;
+    color: var(--clr-preto);
+    border: 1px solid var(--clr-cinza-medio);
+    border-radius: var(--border-radius);
+    padding: 0.375rem 0.75rem;
+    transition: var(--transition);
+
+}
+
+.btn {
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    font-weight: var(--font-weight);
+    line-height: 1.5;
+    color: var(--clr-branco);
+    background: var(--clr-azul-medio);
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 0.575rem 0.85rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn:hover {
+    background: var(--clr-azul-claro);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo img {
+    width: 240px;
+    height: auto;
+}

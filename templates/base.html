@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hepta+Slab:wght@1..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./templates/assets/css/style.css">
+    {% block head %}
+        <title>{% block title %}{% endblock %} - Minha Página</title>
+    {% endblock %}
+</head>
+<body>
+    <main>
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <footer>
+        {% block footer %}
+            <p>&copy; 2024 Minha Página</p>
+        {% endblock %}
+    </footer>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+    "name": "thiago/projeto-teste",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Thiago L. Santos",
+            "email": "thiagoleites@gmail.com"
+        }
+    ],
+    "require": {
+        "twig/twig": "^3.0"
+    }
+}
