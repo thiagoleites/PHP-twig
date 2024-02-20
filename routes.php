@@ -7,8 +7,7 @@ $router = new Router();
 
 // Rotas para home
 $router->addRoute('home', 'GET', '/', 'App\Controller\HomeController', 'index');
-
-$router->addRoute('teste', 'GET', '/teste', 'App\Controller\HomeController', 'teste');
+$router->addRoute('login', 'GET', '/login', 'App\Controller\HomeController', 'login');
 
 
 // Rotas para pessoa

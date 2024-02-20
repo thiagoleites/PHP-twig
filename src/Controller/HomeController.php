@@ -10,4 +10,9 @@ class HomeController extends Controller {
     public function index(): void {
         echo $this->twig->render('home.html');
     }
+
+    public function login()
+    {
+        echo $this->twig->render('login.html');
+    }
 }

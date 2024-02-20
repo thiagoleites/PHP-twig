@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App;
 
-// use App\Controller\HomeController;
-
 class Router
 {
     private array $routes = [];
@@ -19,16 +17,24 @@ class Router
             'controller' => $controller,
             'action' => $action,
         ];
-
+    
+        // Certifique-se de que você está registrando a rota corretamente no array $routeNames
         $this->routeNames[$name] = $uri;
     }
 
     public function getPath(string $name): string
     {
-        // return $this->routeNames[$name] ?? '/';
-        $path = $this->routeNames[$name] ?? '/';
-        echo "getPath($name) retorna $path<br>";
-        return $path;
+        echo "Debug: Obtendo caminho para a rota '$name'<br>";
+
+        if (isset($this->routeNames) && isset($name)) {
+            if (isset($this->routeNames[$name])) {
+                $path = $this->routeNames[$name];
+                echo "Debug: Caminho encontrado para a rota '$name': $path<br>";
+                return $path;
+            }
+        }
+
+        return '/';
     }
 
     public function dispatch(): void

@@ -5,8 +5,14 @@
 {% block content %}
     <h1>Contato</h1>
     <p>Entre em contato conosco!</p>
+    <hr>
+    <code>
+
+        <p>{{ path('contato_enviar') }}</p>
+    </code>
+    <hr>
     <div class="contato_formulario">
-        <form action="{{ path('contato_enviar') }}" method="post">
+        <form action="" method="post">
             
             <div class="form-block">
                 <label for="email">Seu e-mail:</label>

@@ -6,6 +6,8 @@ namespace App;
 
 use App\Database\Connect;
 use App\Twig\RouterExtension;
+use Twig\Loader\FilesystemLoader;
+use Twig\Environment;
 use App\Router;
 
 abstract class Controller {
@@ -17,8 +19,8 @@ abstract class Controller {
 
     public function __construct() {
         $this->pdo = (new Connect())->getPDO();
-        $this->loader = new \Twig\Loader\FilesystemLoader(__DIR__ . "/../templates");
-        $this->twig = new \Twig\Environment($this->loader);
+        $this->loader = new FilesystemLoader(__DIR__ . "/../templates");
+        $this->twig = new Environment($this->loader);
 
         $this->router = new Router();
         $this->twig->addExtension(new RouterExtension($this->router));

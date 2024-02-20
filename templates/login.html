@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste template</title>
+    <style>
+        :root {
+            --clr-primary: #007bff;
+            --ff: system-ui;
+        }
+
+        * { margin:0; padding:0; box-sizing: border-box; }
+
+        body { 
+            position: relative;
+            line-height: 1.5; 
+            font-family: var(--ff);
+            font-size: var(--ff-size);
+            display: grid;
+            place-items: center;
+            height: 100vh;
+            background: url("./templates/teste/bg-body.jpeg") no-repeat center center/cover;
+        }
+        
+        .container {
+            max-width: 380px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: #FFF;
+            border-radius: 8px;
+        }
+
+        .formulario {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: .75rem 1.5rem;
+            background-color: var(--clr-primary);
+            border: 1px solid transparent;
+            border-radius: 5px;
+            transition: all .3s ease-in;
+            color: #fff;
+            margin: .875rem 0 1rem;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        h1 {
+            width: 100%;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        h2 {
+            font-size: .875rem;
+            color: #ccc;
+            text-align: center;
+            font-weight: 300;
+        }
+
+        input {
+            width: 100%;
+            display: block;
+            border:1px solid #ccc;
+            padding: 10px 15px;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        input:hover {
+            border-color: #007bff;
+        }
+        input::placeholder {
+            color: #ccc;
+        }
+
+        label {
+            display: block;
+            text-transform: uppercase;
+            font-size: 8px;
+            color: #ccc;
+            font-weight: bold;
+            margin: .7rem 0 .5rem;
+        }
+
+        button {
+            display: block;
+            border: 1px solid transparent;
+        }
+
+        #resposta {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, .9);
+            display: none;
+            overflow: hidden;
+        }
+
+        .active {
+            display: block;
+            padding: 18rem;
+        }
+
+        .formulario form {
+            position: relative;
+        }
+
+        #response {
+            width: 100%;
+            position: absolute;
+            height: 30px;
+            padding: 2px 0;
+            bottom: -38px;
+            font-size: 12px;
+            color: #333;
+            text-align: center;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 1rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            #response {
+                bottom: -34px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+        <h2>Enter your details</h2>
+
+        <div class="formulario">
+            <form name="formTest" action="" method="post">
+                <div class="block-form">
+                    <label for="name">Username</label>
+                    <input type="text" id="name" placeholder="Email or username" name="username">
+                </div>
+
+                <div class="block-form">
+                    <label for="pass">Pass</label>
+                    <input type="password" id="pass" placeholder="Password" name="userpass">
+                </div>
+
+                <button type="submit" id="btn_enviar" class="btn btn-primary">Enter</button>
+                <div id="response"></div>
+            </form>
+        </div>
+    </div>
+    <div id="resposta">
+        <img src="./templates/teste/load.gif" alt="" width="50">
+    </div>
+    <script src="https://code.jquery.com/jquery-4.0.0-beta.js"></script>
+    <script>
+        $(function() {
+            $("form[name='formTest']").submit(function(e) {
+                e.preventDefault();
+               var resposta = $("#resposta");
+               var response = $("#response");
+               var mail = $("#name").val();
+               var pass = $("#pass").val();
+
+               if (mail == "" || pass == "") {
+                    response.html("Por favor, preencha todos os campos")
+               }
+            })
+        })
+    </script>
+</body>
+</html>

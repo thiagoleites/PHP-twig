@@ -176,6 +176,7 @@ label {
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100vh;
 }
 
 .logo img {
@@ -196,4 +197,10 @@ label {
 .contato_formulario > form {
     width: 100%;
     display: block;
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding: 1rem 2rem;
+    }
 }
