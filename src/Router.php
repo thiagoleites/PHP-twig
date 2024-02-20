@@ -9,8 +9,9 @@ namespace App;
 class Router
 {
     private array $routes = [];
+    private array $routeNames = [];
 
-    public function addRoute(string $method, string $uri, string $controller, string $action): void
+    public function addRoute(string $name, string $method, string $uri, string $controller, string $action): void
     {
         $this->routes[] = [
             'method' => $method,
@@ -18,6 +19,16 @@ class Router
             'controller' => $controller,
             'action' => $action,
         ];
+
+        $this->routeNames[$name] = $uri;
+    }
+
+    public function getPath(string $name): string
+    {
+        // return $this->routeNames[$name] ?? '/';
+        $path = $this->routeNames[$name] ?? '/';
+        echo "getPath($name) retorna $path<br>";
+        return $path;
     }
 
     public function dispatch(): void

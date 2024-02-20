@@ -115,6 +115,7 @@ h4 {
 }
 
 .form-block {
+    width: 100%;
     margin-bottom: 1.25rem;
 }
 
@@ -126,6 +127,7 @@ label {
 }
 
 .form-input {
+    width: 100%;
     font-family: var(--font-family);
     font-size: var(--font-size);
     font-weight: var(--font-weight);
@@ -138,6 +140,7 @@ label {
 }
 
 .form-textarea {
+    width: 100%;
     font-family: var(--font-family);
     font-size: var(--font-size);
     font-weight: var(--font-weight);
@@ -151,6 +154,7 @@ label {
 }
 
 .btn {
+    width: 100%;
     font-family: var(--font-family);
     font-size: var(--font-size);
     font-weight: var(--font-weight);
@@ -177,4 +181,19 @@ label {
 .logo img {
     width: 240px;
     height: auto;
+}
+
+/* Style contato front */
+.contato_formulario {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+.contato_formulario > form {
+    width: 100%;
+    display: block;
 }

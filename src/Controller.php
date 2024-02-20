@@ -5,17 +5,23 @@ declare(strict_types=1);
 namespace App;
 
 use App\Database\Connect;
+use App\Twig\RouterExtension;
+use App\Router;
 
 abstract class Controller {
 
     protected $pdo;
     protected $loader;
     protected $twig;
+    protected $router;
 
     public function __construct() {
         $this->pdo = (new Connect())->getPDO();
         $this->loader = new \Twig\Loader\FilesystemLoader(__DIR__ . "/../templates");
         $this->twig = new \Twig\Environment($this->loader);
+
+        $this->router = new Router();
+        $this->twig->addExtension(new RouterExtension($this->router));
     }
 
     public function insert(string $table, array $data): bool {

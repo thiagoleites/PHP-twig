@@ -12,8 +12,14 @@ class Connect {
     private string $pass = "";
     private \PDO $pdo;
 
-    public function __construct() {
-        $this->pdo = new \PDO("mysql:host=". $this->host .";dbname=". $this->db, $this->user, $this->pass);
+    public function __construct(string $type = 'mysql') {
+        if ($type === 'mysql') {
+            $this->pdo = new \PDO("mysql:host=". $this->host .";dbname=". $this->db, $this->user, $this->pass);
+        } else if ($type === 'sqlite') {
+            $this->pdo = new \PDO("sqlite:". __DIR__ ."/../../database.sqlite");
+        } else {
+            throw new \Exception("Tipo de banco de dados não suportado");
+        }
     }
 
     public function getPDO(): \PDO {

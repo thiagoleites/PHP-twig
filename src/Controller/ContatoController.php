@@ -13,7 +13,7 @@ class ContatoController extends Controller {
     }
 
     public function enviar(array $data): void {
-        $this->insert('contatos', $data);
+        $this->insert('contato_message', $data);
         header('Location: /contato');
     }
 }

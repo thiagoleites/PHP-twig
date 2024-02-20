@@ -6,16 +6,16 @@ $router = new Router();
 
 
 // Rotas para home
-$router->addRoute('GET', '/', 'App\Controller\HomeController', 'index');
+$router->addRoute('home', 'GET', '/', 'App\Controller\HomeController', 'index');
 
-$router->addRoute('GET', '/teste', 'App\Controller\HomeController', 'teste');
+$router->addRoute('teste', 'GET', '/teste', 'App\Controller\HomeController', 'teste');
 
 
 // Rotas para pessoa
-$router->addRoute('GET','/pessoas','App\Controller\PessoaController', 'index');
+$router->addRoute('pessoas', 'GET','/pessoas','App\Controller\PessoaController', 'index');
 
 // Rotas para contato
-$router->addRoute('GET','/contato','App\Controller\ContatoController', 'index');
-// $router->addRoute('GET','','', 'index');
+$router->addRoute('contato_home', 'GET','/contato','App\Controller\ContatoController', 'index');
+$router->addRoute('contato_enviar', 'POST','/contato/do','App\Controller\ContatoController', 'enviar');
 
 $router->dispatch();
