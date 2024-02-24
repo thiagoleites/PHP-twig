@@ -1,28 +1,75 @@
 <?php
 
-declare(strict_types= 1);// Declaração de tipos escalares
+declare(strict_types=1);
 
 namespace App\Database;
 
-class Connect {
+use PDO;
+use PDOException;
 
-    private string $host = "127.0.0.1";
-    private string $db = "projeto-php-estudo";
-    private string $user = "root";
-    private string $pass = "";
-    private \PDO $pdo;
+class Connect
+{
+    private const MYSQL_HOST = "localhost";
+    private const MYSQL_USER = "root";
+    private const MYSQL_DBNAME = "projeto-php-estudo";
+    private const MYSQL_PASSWD = "";
+    private const MYSQL_OPTIONS = [
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+        PDO::ATTR_CASE => PDO::CASE_NATURAL,
+        PDO::ATTR_PERSISTENT => false
+    ];
 
-    public function __construct(string $type = 'mysql') {
-        if ($type === 'mysql') {
-            $this->pdo = new \PDO("mysql:host=". $this->host .";dbname=". $this->db, $this->user, $this->pass);
-        } else if ($type === 'sqlite') {
-            $this->pdo = new \PDO("sqlite:". __DIR__ ."/../../database.sqlite");
-        } else {
-            throw new \Exception("Tipo de banco de dados não suportado");
+    private const SQLITE_OPTIONS = [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+        PDO::ATTR_CASE => PDO::CASE_NATURAL,
+        PDO::ATTR_PERSISTENT => false
+    ];
+
+    private static $mysqlInstance;
+    private static $sqliteInstance;
+
+    final public function __construct() {}
+
+    public static function getInstance(string $type = 'mysql'): PDO
+    {
+        switch ($type) {
+            case 'mysql':
+                if(empty(self::$mysqlInstance)) {
+                    try {
+                        self::$mysqlInstance = new PDO(
+                            "mysql:host=". self::MYSQL_HOST .";dbname=". self::MYSQL_DBNAME,
+                            self::MYSQL_USER,
+                            self::MYSQL_PASSWD,
+                            self::MYSQL_OPTIONS
+                        );
+                    } catch (PDOException $e) {
+                        die("Erro ao conectar ao banco de dados MySQL: " . $e->getMessage());
+                    }
+                }
+                return self::$mysqlInstance;
+                break;
+            case 'sqlite':
+                if(empty(self::$sqliteInstance)) {
+                    try {
+                        self::$sqliteInstance = new PDO(
+                            "sqlite:". "../banco/database.sqlite",
+                            null,
+                            null,
+                            self::SQLITE_OPTIONS
+                        );
+                    } catch (PDOException $e) {
+                        die("Erro ao conectar ao banco de dados SQLite: " . $e->getMessage());
+                    }
+                }
+                return self::$sqliteInstance;
+                break;
+            default:
+                throw new \InvalidArgumentException("Tipo de banco de dados não suportado: $type");
         }
     }
 
-    public function getPDO(): \PDO {
-        return $this->pdo;
-    }
+    final public function __clone() {}
 }
