@@ -5,22 +5,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Hepta+Slab:wght@1..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="templates/assets/css/style.css?v={{ 'now'|date('U') }}">
-<!--    <link rel="stylesheet" href="./assets/css/style.css">-->
+<!--    <link rel="stylesheet" href="./assets/css/style.css?v={{ 'now'|date('U') }}">-->
+    <script src="https://cdn.tailwindcss.com"></script>
+
     {% block head %}
         <title>{% block title %}{% endblock %} - Minha Página</title>
     {% endblock %}
 </head>
-<body>
+<body class="h-screen antialiased">
     <main>
         <div class="container">
             {% block content %}{% endblock %}
         </div>
     </main>
 
-    <footer>
+    <footer class="absolute w-full bottom-0 flex justify-center items-center p-10">
         {% block footer %}
-            <p>&copy; 2024 Minha Página</p>
+            <p class="text-sm text-center">&copy; {{ 'now'|date('Y') }} -  Minha Página</p>
+
         {% endblock %}
     </footer>
 </body>

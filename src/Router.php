@@ -6,6 +6,7 @@ namespace App;
 
 use Exception;
 
+// TODO implement documentation
 class Router
 {
     private array $routes = [];
