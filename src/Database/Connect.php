@@ -9,7 +9,7 @@ use PDOException;
 
 class Connect
 {
-    private const MYSQL_HOST = "localhost";
+    private const MYSQL_HOST = "127.0.0.1";
     private const MYSQL_USER = "root";
     private const MYSQL_DBNAME = "projeto-php-estudo";
     private const MYSQL_PASSWD = "";
@@ -51,9 +51,9 @@ class Connect
         return self::$instance;
     }
 
-    public function getConnect(): PDO
+    public function getConnect()
     {
-        return self::$instance;
+        return self::getInstance();
     }
 
     final public function __clone()

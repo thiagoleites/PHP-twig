@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App;
 
+use Exception;
+
 class Router
 {
     private array $routes = [];
@@ -18,7 +20,7 @@ class Router
             'controller' => $controller,
             'action' => $action,
         ];
-    
+
         $this->routeNames[$name] = $uri;
     }
 
@@ -28,7 +30,7 @@ class Router
             return $this->routeNames[$name];
         }
 
-        return '/';
+        throw new Exception("Route '{$name}' not found");
     }
 
     public function dispatch(): void
@@ -37,21 +39,47 @@ class Router
         $method = $_SERVER['REQUEST_METHOD'];
 
         foreach ($this->routes as $route) {
-            if ($route['method'] === $method && $route['uri'] === $uri) {
+            if ($route['method'] === $method && $this->matchUri($route['uri'], $uri, $params)) {
                 $controller = new $route['controller']();
                 $action = $route['action'];
-                
+
                 if (method_exists($controller, $action)) {
-                    $controller->{$action}();
+                    $controller->{$action}(...$params);
                 } else {
-                    http_response_code(500);
-                    echo "500 - Método '{$action}' não encontrado no controlador '{$route['controller']}'";
+                    $this->sendResponse(500, "500 - Método '{$action}' não encontrado no controlador '{$route['controller']}'");
                 }
                 return;
             }
         }
 
-        http_response_code(404);
-        echo '404 - Página não encontrada';
+        $this->sendResponse(404, '404 - Página não encontrada');
+    }
+
+    private function matchUri(string $routeUri, string $requestUri, ?array &$params = []): bool
+    {
+        $routeParts = explode('/', trim($routeUri, '/'));
+        $requestParts = explode('/', trim($requestUri, '/'));
+
+        if (count($routeParts) !== count($requestParts)) {
+            return false;
+        }
+
+        $params = [];
+
+        foreach ($routeParts as $index => $part) {
+            if (preg_match('/^{\w+}$/', $part)) {
+                $params[] = $requestParts[$index];
+            } elseif ($part !== $requestParts[$index]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function sendResponse(int $statusCode, string $message): void
+    {
+        http_response_code($statusCode);
+        echo $message;
     }
 }

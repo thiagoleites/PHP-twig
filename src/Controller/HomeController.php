@@ -8,7 +8,8 @@ use App\Controller;
 
 class HomeController extends Controller {
     public function index(): void {
-        echo $this->twig->render('home.html');
+        $testes = "teste de variavel";
+        echo $this->twig->render('home.html', ['testes' => $testes]);
     }
 
     public function login()
