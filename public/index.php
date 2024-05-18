@@ -14,6 +14,7 @@ use App\Controller\HomeController;
 
 $router = new Router();
 $router->addRoute('home', 'GET', '/', HomeController::class, 'index');
+$router->addRoute('item.show', 'GET', '/item/{id}', HomeController::class, 'show');
 
 
 try {
