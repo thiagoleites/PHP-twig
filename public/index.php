@@ -6,8 +6,8 @@ require "../vendor/autoload.php";
 
 include "../routes.php";
 
-// use App\Router;
-// $router = new Router();
-// $router->dispatch();
+use App\Router;
+$router = new Router();
+$router->dispatch();
 
 

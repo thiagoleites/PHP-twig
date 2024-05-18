@@ -12,26 +12,20 @@ class Router
     public function addRoute(string $name, string $method, string $uri, string $controller, string $action): void
     {
         $this->routes[] = [
+            'name' => $name,
             'method' => $method,
             'uri' => $uri,
             'controller' => $controller,
             'action' => $action,
         ];
     
-        // Certifique-se de que você está registrando a rota corretamente no array $routeNames
         $this->routeNames[$name] = $uri;
     }
 
     public function getPath(string $name): string
     {
-        echo "Debug: Obtendo caminho para a rota '$name'<br>";
-
-        if (isset($this->routeNames) && isset($name)) {
-            if (isset($this->routeNames[$name])) {
-                $path = $this->routeNames[$name];
-                echo "Debug: Caminho encontrado para a rota '$name': $path<br>";
-                return $path;
-            }
+        if (isset($this->routeNames[$name])) {
+            return $this->routeNames[$name];
         }
 
         return '/';
@@ -39,21 +33,25 @@ class Router
 
     public function dispatch(): void
     {
-        $uri = $_SERVER['REQUEST_URI'];
+        $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $method = $_SERVER['REQUEST_METHOD'];
 
         foreach ($this->routes as $route) {
-            $uriParts = explode('/', $uri);
-            if ($route['method'] === $method && $route['uri'] === '/'.$uriParts[2]) {
+            if ($route['method'] === $method && $route['uri'] === $uri) {
                 $controller = new $route['controller']();
                 $action = $route['action'];
-                $controller->{$action}();
+                
+                if (method_exists($controller, $action)) {
+                    $controller->{$action}();
+                } else {
+                    http_response_code(500);
+                    echo "500 - Método '{$action}' não encontrado no controlador '{$route['controller']}'";
+                }
                 return;
             }
         }
 
         http_response_code(404);
         echo '404 - Página não encontrada';
-
     }
 }
