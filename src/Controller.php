@@ -18,7 +18,7 @@ abstract class Controller {
     protected $router;
 
     public function __construct() {
-        $this->pdo = (new Connect())->getPDO();
+        $this->pdo = (new Connect())->getConnect();
         $this->loader = new FilesystemLoader(__DIR__ . "/../templates");
         $this->twig = new Environment($this->loader);
 

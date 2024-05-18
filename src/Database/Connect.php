@@ -28,48 +28,35 @@ class Connect
         PDO::ATTR_PERSISTENT => false
     ];
 
-    private static $mysqlInstance;
-    private static $sqliteInstance;
+    private static $instance;
 
-    final public function __construct() {}
-
-    public static function getInstance(string $type = 'mysql'): PDO
+    final public function __construct()
     {
-        switch ($type) {
-            case 'mysql':
-                if(empty(self::$mysqlInstance)) {
-                    try {
-                        self::$mysqlInstance = new PDO(
-                            "mysql:host=". self::MYSQL_HOST .";dbname=". self::MYSQL_DBNAME,
-                            self::MYSQL_USER,
-                            self::MYSQL_PASSWD,
-                            self::MYSQL_OPTIONS
-                        );
-                    } catch (PDOException $e) {
-                        die("Erro ao conectar ao banco de dados MySQL: " . $e->getMessage());
-                    }
-                }
-                return self::$mysqlInstance;
-                break;
-            case 'sqlite':
-                if(empty(self::$sqliteInstance)) {
-                    try {
-                        self::$sqliteInstance = new PDO(
-                            "sqlite:". "../banco/database.sqlite",
-                            null,
-                            null,
-                            self::SQLITE_OPTIONS
-                        );
-                    } catch (PDOException $e) {
-                        die("Erro ao conectar ao banco de dados SQLite: " . $e->getMessage());
-                    }
-                }
-                return self::$sqliteInstance;
-                break;
-            default:
-                throw new \InvalidArgumentException("Tipo de banco de dados não suportado: $type");
-        }
     }
 
-    final public function __clone() {}
+    public static function getInstance(): PDO
+    {
+        if (empty(self::$instance)) {
+            try {
+                self::$instance = new PDO(
+                    "mysql:host=" . self::MYSQL_HOST . ";dbname=" . self::MYSQL_DBNAME,
+                    self::MYSQL_USER,
+                    self::MYSQL_PASSWD,
+                    self::MYSQL_OPTIONS
+                );
+            } catch (PDOException $e) {
+                die("Erro ao conectar ao banco de dados MySQL: " . $e->getMessage());
+            }
+        }
+        return self::$instance;
+    }
+
+    public function getConnect(): PDO
+    {
+        return self::$instance;
+    }
+
+    final public function __clone()
+    {
+    }
 }
