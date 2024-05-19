@@ -94,7 +94,7 @@ abstract class Controller
             $stmt = $this->pdo->prepare($sql);
             return $stmt->execute(array_values($data));
         } catch (PDOException $e) {
-            $this->logError("Database query failed: " . $e->getMessage() . " | SQL: $sql | Params: " . json_encode($params));
+            $this->logError("Database query failed: " . $e->getMessage() . " | SQL: $sql | Params: " . json_encode(array_values($data)));
             return false;
         }
     }
