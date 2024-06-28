@@ -4,3 +4,4 @@ vendor/
 database.sqlite
 KEYNOTE.md
 templates/teste
+.idea/

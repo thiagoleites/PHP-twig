@@ -3,7 +3,7 @@
 
  RewriteCond %{THE_REQUEST} public/([^\s?]*) [NC]
  RewriteRule ^ %1 [L,NE,R=302]
- RewriteRule ^((?!public/).*)$ projeto-teste/public/$1 [L,NC]
+ RewriteRule ^((?!public/).*)$ PHP-twig/public/$1 [L,NC]
 
 
 #RewriteEngine On
